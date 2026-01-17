@@ -74,3 +74,14 @@ Default plugin will look for .proto files at ***src/main/proto*** if using diffe
 
 To generate code from proto compile the project. The code will be generated in target.
 > TIP: To recognize these as dependencies in IntelliJ mark *target/generated-sources/grpc-java* and *target/generated-sources/java* as Generated Sources Root
+
+
+----
+
+- RPC serve which is running in Java or Python will not interfere with other Server or process
+What that mean ?
+    
+    - I can still run my regular spring boot application on port 8080 and my RPC server on 9090. Similarly in python i can run FastAPI server and RPC server at the same time on different port.
+
+Open Question ?
+- How dose the network pool will be configured. As in Spring boot and RPC will share the network bandwidth ?
