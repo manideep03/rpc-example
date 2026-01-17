@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 public class OrderController {
 
@@ -21,7 +23,10 @@ public class OrderController {
                 .setPrice(1)
                 .build();
 
-        OrderResponse response = orderStub.placeOrder(request);
+        OrderResponse response = orderStub
+                // timeout to call
+                .withDeadlineAfter(2, TimeUnit.SECONDS)
+                .placeOrder(request);
         return "Order Status: " + response.getStatus() + " ID: " + response.getOrderId();
     }
 }
