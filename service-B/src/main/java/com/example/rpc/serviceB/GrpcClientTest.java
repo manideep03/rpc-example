@@ -2,19 +2,25 @@ package com.example.rpc.serviceB;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class GrpcClientTest implements CommandLineRunner {
+    @Value("${grpcPY.InventoryService.host}")
+    String host;
+
+    @Value("${grpcPY.InventoryService.port}")
+    int port;
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Starting gRPC Call to Python Service...");
 
         // 1. Create the communication channel
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(this.host, this.port)
                 .usePlaintext() // Necessary because our Python server isn't using SSL
                 .build();
 

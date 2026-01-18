@@ -1,9 +1,10 @@
 import grpc
 from concurrent import futures
 
-from inventory_service.protos import inventory_pb2
-from inventory_service.protos import inventory_pb2_grpc
+from protos import inventory_pb2
+from protos import inventory_pb2_grpc
 
+print("start C")
 # This class "Implements" the interface defined in our proto file
 class InventoryServicer(inventory_pb2_grpc.InventoryServiceServicer):
 
@@ -27,4 +28,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == '__main__':
+    print("start main!")
     serve()
