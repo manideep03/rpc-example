@@ -1,0 +1,42 @@
+services:
+  # Service A: The Gateway (Java)
+  service-a:
+    image: service-a
+    ports:
+      - "8080:8080"
+    environment:
+      - ORDER_SERVICE_HOST=service-b
+      - ORDER_SERVICE_PORT=9091
+      - NOTIFICATION_SERVICE_HOST=service-d
+      - NOTIFICATION_SERVICE_PORT=9092
+    depends_on:
+      - service-b
+      - service-d
+
+  # Service B: The Order Service (Java)
+  service-b:
+    image: service-b
+    expose:
+      - "9091"
+      - "8081"
+    environment:
+      - INV_SERVICE_HOST=service-c
+      - INV_SERVICE_PORT=50051
+    depends_on:
+      - service-c
+
+  # Service C: The Inventory Service (Python)
+  service-c:
+    image: service-c
+    expose:
+      - "50051"
+
+  # Service D: The Notification Service (Java)
+  service-d:
+    image: service-d
+    expose:
+      - "9092"
+
+networks:
+  default:
+    name: rpc-example-network
