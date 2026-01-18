@@ -85,7 +85,7 @@ What that mean ?
 
 Open Question ?
 - How dose the network pool will be configured. As in Spring boot and RPC will share the network bandwidth ?
-  - Ans -> will be different because gRPC will sping of new netty connection threads/pool so it will interfere with Spring Web/Spring Flux server. Bandwidth is same as serving on same host but port will be different.
+  - Ans -> will be different because gRPC will spin up new netty connection threads/pool so it will not interfere with Spring Web/Spring Flux server. Bandwidth is same as serving on same host but port will be different.
 
 ### Docker
 Build docker images
