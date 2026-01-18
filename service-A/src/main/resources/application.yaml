@@ -1,7 +1,7 @@
-grpc.client.order-service.address: static://localhost:9090
+grpc.client.order-service.address: 'static://${ORDER_SERVICE_HOST:localhost}:${ORDER_SERVICE_PORT:9090}'
 grpc.client.order-service.negotiation-type: plaintext
 
-grpc.client.notification-service.address: static://localhost:9091
+grpc.client.notification-service.address: 'static://${NOTIFICATION_SERVICE_HOST:localhost}:${NOTIFICATION_SERVICE_PORT:9090}'
 grpc.client.notification-service.negotiation-type: plaintext
 
-server.port: 8081
+server.port: 8080

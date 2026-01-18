@@ -10,21 +10,21 @@
 ----
 
 ### To install python rpc dependencies
-```pip
+```bash
 pip install grpcio grpcio-tools        
 ```
 
 ### To convert proto files for python
-```cmd
+```bash
 python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. inventory.proto
 ```
 Sample usage
-```cmd
+```bash
 python -m grpc_tools.protoc -I. --python_out=inventory_service\ --grpc_python_out=inventory_service\ protos\inventory.proto 
 ```
 
 ### To run python service in the project
-```cmd
+```bash
 python -m inventory_service.app.inventory_server
 ```
 
@@ -85,3 +85,27 @@ What that mean ?
 
 Open Question ?
 - How dose the network pool will be configured. As in Spring boot and RPC will share the network bandwidth ?
+  - Ans -> will be different because gRPC will sping of new netty connection threads/pool so it will interfere with Spring Web/Spring Flux server. Bandwidth is same as serving on same host but port will be different.
+
+### Docker
+Build docker images
+```bash
+docker build -t service-a -f service-A/Dockerfile . && docker build -t service-b -f service-B/Dockerfile . && docker build -t service-c -f service_C/Dockerfile . && docker build -t service-d -f service-D/Dockerfile .
+```
+
+How to run it:
+Start everything:
+```bash
+docker-compose up
+```
+(Add -d at the end if you want it to run in the background)
+
+Check logs: If something isn't working, check the logs of a specific service:
+```bash
+docker-compose logs -f service-a
+```
+
+Stop everything:
+```bash
+docker-compose down
+```
